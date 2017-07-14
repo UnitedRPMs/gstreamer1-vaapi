@@ -5,7 +5,7 @@
 
 Name:           gstreamer1-vaapi
 Version:        1.12.1
-Release:        2%{?dist}
+Release:        2%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
 License:        LGPLv2+
