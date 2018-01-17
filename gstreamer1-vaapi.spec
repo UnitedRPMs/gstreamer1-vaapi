@@ -5,7 +5,7 @@
 
 Name:           gstreamer1-vaapi
 Version:        1.12.4
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
 License:        LGPLv2+
@@ -115,6 +115,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+
+* Tue Jan 16 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.4-8-gite540e08
+- Rebuilt for libva 2.0
 
 * Fri Dec 08 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.4-7-gite540e08
 - Updated to 1.12.4-7-gite540e08
