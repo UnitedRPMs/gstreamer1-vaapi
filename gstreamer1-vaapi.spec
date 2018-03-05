@@ -1,11 +1,11 @@
-%global gitdate 20171208
-%global commit0 e540e0899421d580423f41a7bd65307923eb6a26 
+%global gitdate 20180304
+%global commit0 f6f981e371ba8b189174a0d8a18aac9c8ea6bfab 
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           gstreamer1-vaapi
-Version:        1.12.4
-Release:        8%{?gver}%{dist}
+Version:        1.13.90
+Release:        7%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
 License:        LGPLv2+
@@ -116,7 +116,10 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 %changelog
 
-* Tue Jan 16 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.4-8-gite540e08
+* Sun Mar 04 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.90-7.gitf6f981e  
+- Updated to 1.13.90-7.gitf6f981e
+
+* Tue Jan 16 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.4-8.gite540e08
 - Rebuilt for libva 2.0
 
 * Fri Dec 08 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.4-7-gite540e08
