@@ -28,6 +28,7 @@ BuildRequires:  pkgconfig(glesv2)
 BuildRequires:	git
 BuildRequires:	intltool
 BuildRequires:	libtool
+BuildRequires:	gcc-c++
 
 # documentation
 BuildRequires:  gtk-doc
