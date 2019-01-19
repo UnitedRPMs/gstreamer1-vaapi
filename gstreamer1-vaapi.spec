@@ -1,10 +1,10 @@
-%global gitdate 20181003
-%global commit0 8b1b1f44bda266830f2f28adbb95720f3bc3433f
+%global gitdate 20190119
+%global commit0 d158e78ef8cb19d089270bbd907f122831e51162
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           gstreamer1-vaapi
-Version:        1.14.4
+Version:        1.15.1
 Release:        7%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
@@ -13,9 +13,9 @@ URL:            https://cgit.freedesktop.org/gstreamer/gstreamer-vaapi
 Source0: 	https://github.com/GStreamer/gstreamer-vaapi/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires:  glib2-devel >= 2.32
-BuildRequires:  gstreamer1-devel >= 1.4.0
-BuildRequires:  gstreamer1-plugins-base-devel >= 1.4.0
-BuildRequires:  gstreamer1-plugins-bad-free-devel >= 1.4.0
+BuildRequires:  gstreamer1-devel >= %{version}
+BuildRequires:  gstreamer1-plugins-base-devel >= %{version}
+BuildRequires:  gstreamer1-plugins-bad-free-devel >= %{version}
 BuildRequires:  libva-devel >= 1.1.0
 BuildRequires:  libdrm-devel
 BuildRequires:  libudev-devel
@@ -116,6 +116,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+
+* Fri Jan 18 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.15.1-7.gitd158e78
+- Updated to 1.15.1-7.gitd158e78
 
 * Wed Oct 03 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.14.4-7.git8b1b1f4
 - Updated to 1.14.4-7.git8b1b1f4
