@@ -5,3 +5,4 @@ SPECS/*
 SRPMS/*
 gstreamer1-vaapi*.tar.gz
 .directory
+*.rpm
