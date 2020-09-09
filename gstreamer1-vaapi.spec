@@ -1,10 +1,10 @@
 %global gitdate 20191204
-%global commit0 20d86914bc7cc6390f6bd90599f41dc99b164d96
+%global commit0 0320e7a3b6cc755ea3c958b9fc5608aa00d4e8f4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           gstreamer1-vaapi
-Version:        1.16.2
+Version:        1.17.90
 Release:        7%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
@@ -29,6 +29,9 @@ BuildRequires:	git
 BuildRequires:	intltool
 BuildRequires:	libtool
 BuildRequires:	gcc-c++
+BuildRequires:	meson
+BuildRequires:	cmake
+BuildRequires:	pkgconfig(gtk+-3.0)
 
 # documentation
 BuildRequires:  gtk-doc
@@ -75,31 +78,20 @@ rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common
 
 %build
 
-NOCONFIGURE=1 ./autogen.sh
 
-# Wayland support in libva isn't present - gstreamer-vaapi can't support Wayland without it
-# https://bugzilla.redhat.com/show_bug.cgi?id=1051862
-%configure \
-    --with-package-name="GStreamer VAAPI Plugin (Fedora Linux)" \
-    --with-package-origin="https://unitedrpms.github.io" \
-    --enable-experimental --disable-static \
-    --enable-static=no \
-%{?_without_wayland:--disable-wayland} \
-           --disable-builtin-libvpx
+%meson \
+    -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
+    -D package-origin="https://unitedrpms.github.io" \
+    -D doc=disabled -D sidplay=disabled
 
-  # https://bugzilla.gnome.org/show_bug.cgi?id=655517
-  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+%meson_build 
 
-make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%make_install
+%meson_install 
 
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
-%check
-%__make check
 
 %post -p /sbin/ldconfig
 
@@ -116,6 +108,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+
+* Sun Sep 06 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.17.90-7.git0320e7a
+- Updated to 1.17.90-7.git0320e7a
 
 * Wed Dec 04 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.2-7.git20d8691
 - Updated to 1.16.2-7.git20d8691
