@@ -1,10 +1,10 @@
 %global gitdate 20191204
-%global commit0 f9e925af3645439f7b7a4580700fcd6ce17fc1c9
+%global commit0 153325f39ab6b94fd9f607cd33986132a00459ea
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           gstreamer1-vaapi
-Version:        1.18.1
+Version:        1.18.2
 Release:        7%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
@@ -108,6 +108,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+
+* Mon Dec 07 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.2-7.git153325f
+- Updated to 1.18.2-7.git153325f
 
 * Thu Oct 29 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.1-7.gitf9e925a
 - Updated to 1.18.1-7.gitf9e925a
