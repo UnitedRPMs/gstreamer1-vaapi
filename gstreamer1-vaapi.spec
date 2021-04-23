@@ -1,10 +1,10 @@
 %global gitdate 20191204
-%global commit0 5890079ecbf2f9c76a5ded398cda8fd2ac822d21
+%global commit0 b5b2e3b9208f1f93bc5b0244d29dfed157d78293
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           gstreamer1-vaapi
-Version:        1.18.3
+Version:        1.18.4
 Release:        7%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
@@ -79,16 +79,16 @@ rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common
 %build
 
 
-%meson \
+meson build --prefix=/usr --libdir=%{_libdir} --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc \
     -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
     -D package-origin="https://unitedrpms.github.io" \
     -D doc=disabled -D sidplay=disabled
 
-%meson_build 
+%meson_build -C build
 
 
 %install
-%meson_install 
+%meson_install -C build
 
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
@@ -108,6 +108,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+
+* Mon Apr 19 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.4-7.gitb5b2e3b
+- Updated to 1.18.4
 
 * Mon Jan 25 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.3-7.git5890079
 - Updated to 1.18.3
