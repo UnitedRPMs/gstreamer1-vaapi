@@ -3,14 +3,18 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
+%global         meson_conf      meson --buildtype=release --prefix=/usr --libdir=%{_libdir} --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc
+
+%global debug_package %{nil}
+
 Name:           gstreamer1-vaapi
-Version:        1.19.2
+Version:        1.19.3
 Release:        7%{?gver}%{dist}
 Summary:        GStreamer plugins to use VA API video acceleration
 
 License:        LGPLv2+
 URL:            https://cgit.freedesktop.org/gstreamer/gstreamer-vaapi
-Source0: 	https://github.com/GStreamer/gstreamer-vaapi/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: 	https://gstreamer.freedesktop.org/src/gstreamer-vaapi/gstreamer-vaapi-%{version}.tar.xz
 
 BuildRequires:  glib2-devel >= 2.32
 BuildRequires:  gstreamer1-devel >= %{version}
@@ -73,22 +77,21 @@ The %{name}-devel-docs package contains developer documentation
 for the GStreamer VA API video acceleration plugins
 
 %prep
-%autosetup -n gstreamer-vaapi-%{commit0} 
+%autosetup -n gstreamer-vaapi-%{version} 
 rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common  
 
 %build
 
 
-meson build --prefix=/usr --libdir=%{_libdir} --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc \
+%meson_conf _build \
     -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
     -D package-origin="https://unitedrpms.github.io" \
     -D doc=disabled -D sidplay=disabled
 
-%meson_build -C build
-
+%meson_build -C _build
 
 %install
-%meson_install -C build
+%meson_install -C _build 
 
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
@@ -108,6 +111,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 
 %changelog
+
+* Wed Nov 17 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.19.3-7
+- Updated to 1.19.3
 
 * Mon Oct 04 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.19.2-7.gitc3ddb29
 - Updated to 1.19.2
